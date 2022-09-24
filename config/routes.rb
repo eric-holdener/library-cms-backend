@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :reviews
     resources :user_books
     resources :books
-    devise_for :users
+    devise_for :users, controllers: { sessions: :sessions }, path_names: { sign_in: :login }
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
