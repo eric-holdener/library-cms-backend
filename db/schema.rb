@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_203029) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_29_203551) do
   create_table "books", force: :cascade do |t|
     t.string "isbn", null: false
     t.datetime "created_at", null: false
@@ -23,6 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_203029) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "jwt_denylist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", precision: nil, null: false
+    t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -49,8 +55,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_203029) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "image"
+    t.text "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "comments", "users"
