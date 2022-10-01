@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          :registerable,
          jwt_revocation_strategy: JwtDenylist
+
+  has_many :user_books
+  has_many :books, through: :user_books
+  has_many :comments
+  has_many :reviews
 end
